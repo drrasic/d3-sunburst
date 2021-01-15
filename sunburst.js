@@ -94,11 +94,12 @@
 		var radius = Math.min(this.opt.width, this.opt.height) / 2
 
 		this.vis = d3.select(this.opt.selectors.chart).append("svg:svg")
-			.attr("width", this.opt.width)
-			.attr("height", this.opt.height)
+			.attr("width", '80%')
+			.attr("height", '80%')
+			.attr('viewBox', (-this.opt.width / 2) + ' ' + (-this.opt.height / 2) + ' ' + this.opt.width + ' ' + this.opt.height)
+			.attr('preserveAspectRatio', 'xMinYMin')
 			.append("svg:g")
 			.attr("id", "sunburst-container")
-			.attr("transform", "translate(" + this.opt.width / 2 + "," + this.opt.height / 2 + ")");
 
 		var arc = d3.arc()
 			.startAngle(function(d) { return d.x0; })
@@ -235,7 +236,7 @@
 	Sunburst.prototype.initializeBreadcrumbTrail = function() {
 		// Add the svg area.
 		var trail = d3.select(this.opt.selectors.breadcrumbs).append("svg:svg")
-			.attr("width", this.opt.width)
+			.attr("width", '100%')
 			.attr("height", 50)
 			.attr("id", "trail");
 			// Add the label at the end, for the percentage.
@@ -298,7 +299,7 @@
 			.attr("y", b.h / 2)
 			.attr("dy", "0.35em")
 			.attr("text-anchor", "middle")
-			.text(function(d) { return d.data.name; });
+			.text(function(d) { return d.data.name.slice(-8); });
 
 		// Set position for entering and updating nodes.
 		entering.attr("transform", function(d, i) {
